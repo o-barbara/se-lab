@@ -14,6 +14,7 @@ public class TorpedoStore {
 
   private int torpedoCount = 0;
 
+  //added Random attribute to ensure that the random number generator is not re-seeded on every call to fire()
   private Random generator = new Random();
 
   public TorpedoStore(int numberOfTorpedos){
@@ -30,6 +31,7 @@ public class TorpedoStore {
     }
   }
 
+  //fixed exception not being thrown
   public boolean fire(int numberOfTorpedos){
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
       throw new IllegalArgumentException("numberOfTorpedos");
@@ -40,6 +42,7 @@ public class TorpedoStore {
     // simulate random overheating of the launcher bay which prevents firing
     double r = generator.nextDouble();
 
+    //fixed torpedoCount being correctly calculated after firing
     if (r >= FAILURE_RATE) {
       // successful firing
       this.torpedoCount -= numberOfTorpedos;
